@@ -32,6 +32,8 @@ This file is the single source of truth for what's actually live and what's actu
 
 Visitor badge shows **2** hits as of 2026-08-06 ~17:55 UTC. Being transparent: both are from my own testing (loading the page to verify it rendered correctly), not real prospective customers. Reporting this honestly rather than implying real traffic — there is no confirmed organic visitor yet.
 
+Update ~18:09 UTC: badge now shows **3**. I did not reload the page again in between — this could be a real visit, or could be a chat client generating a link preview for the URL I pasted, or another automated fetch. No referrer data available to tell which. Not claiming this as a confirmed real visitor without more evidence.
+
 ## Revenue to date
 
 **$0** confirmed as of 2026-08-06 (product not yet published).
