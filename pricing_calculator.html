@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WISP Pricing & Breakeven Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  h1 { font-size: 1.4rem; }
+  fieldset { border: 1px solid #8884; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.2rem; }
+  legend { font-weight: 600; padding: 0 .4rem; }
+  label { display: block; margin: .6rem 0 .2rem; font-size: .92rem; }
+  input { width: 100%; padding: .5rem; border-radius: 6px; border: 1px solid #8886; font-size: 1rem; box-sizing: border-box; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .result { background: #8881; border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .result b { font-size: 1.3rem; }
+  .muted { opacity: .7; font-size: .85rem; }
+</style>
+</head>
+<body>
+<h1>WISP Pricing & Breakeven Calculator</h1>
+<p class="muted">Part of the WISP Launch Kit. Fill in your numbers — everything runs locally in your browser, nothing is sent anywhere.</p>
+
+<fieldset>
+  <legend>Monthly costs</legend>
+  <label>Backhaul / upstream bandwidth cost (per month)</label>
+  <input type="number" id="backhaul" value="300">
+  <div class="row">
+    <div>
+      <label>Equipment amortization (per month)</label>
+      <input type="number" id="amort" value="150">
+    </div>
+    <div>
+      <label>Other fixed costs (tower rent, staff, etc.)</label>
+      <input type="number" id="fixed" value="200">
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Customer mix &amp; pricing</legend>
+  <div class="row">
+    <div>
+      <label># Residential customers</label>
+      <input type="number" id="resN" value="40">
+    </div>
+    <div>
+      <label>Residential price/mo</label>
+      <input type="number" id="resP" value="25">
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label># Business customers</label>
+      <input type="number" id="bizN" value="5">
+    </div>
+    <div>
+      <label>Business price/mo</label>
+      <input type="number" id="bizP" value="60">
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Day passes sold per month</label>
+      <input type="number" id="dayN" value="80">
+    </div>
+    <div>
+      <label>Day pass price</label>
+      <input type="number" id="dayP" value="5">
+    </div>
+  </div>
+</fieldset>
+
+<div class="result" id="out"></div>
+
+<script>
+function calc(){
+  const num = id => parseFloat(document.getElementById(id).value) || 0;
+  const cost = num('backhaul') + num('amort') + num('fixed');
+  const revenue = num('resN')*num('resP') + num('bizN')*num('bizP') + num('dayN')*num('dayP');
+  const profit = revenue - cost;
+  const margin = revenue ? (profit/revenue*100) : 0;
+  const out = document.getElementById('out');
+  out.innerHTML =
+    'Monthly revenue: <b>$' + revenue.toFixed(2) + '</b><br>' +
+    'Monthly fixed costs: <b>$' + cost.toFixed(2) + '</b><br>' +
+    'Monthly profit: <b style="color:' + (profit>=0?'#2a7':'#d33') + '">$' + profit.toFixed(2) + '</b> (' + margin.toFixed(1) + '% margin)';
+}
+document.querySelectorAll('input').forEach(i => i.addEventListener('input', calc));
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+Copyright (c) 2026 Alejandro Amezquita Salinas. All rights reserved.
+
+The contents of `product/` and `templates/` (the WISP Launch Kit playbook, templates,
+and pricing calculator) are proprietary and licensed only to individuals who have
+purchased the kit, for their own personal or business use. Redistribution, resale,
+or republishing of this content, in whole or in part, is not permitted without
+prior written permission.
+
+The code in `site/` (the landing page HTML/CSS/JS) may be reused as a template for
+your own projects.
